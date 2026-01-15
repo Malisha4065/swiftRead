@@ -62,11 +62,11 @@ const WordDisplay: FC<WordDisplayProps> = ({ word }) => {
 
       {/* Visual guide for the focal point */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-between h-24 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         aria-hidden="true"
       >
-        <div className="w-[2px] h-2 bg-primary/50 rounded-full"></div>
-        <div className="w-[2px] h-2 bg-primary/50 rounded-full"></div>
+        <div className="absolute top-[-3.5rem] w-[2px] h-2 bg-primary/50 rounded-full"></div>
+        <div className="absolute top-[3.5rem] w-[2px] h-2 bg-primary/50 rounded-full"></div>
       </div>
     </div>
   );
