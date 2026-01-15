@@ -3,10 +3,13 @@
 import { useState } from "react";
 import FileUpload from "@/components/file-upload";
 import SpeedReader from "@/components/speed-reader";
-import * as pdfjs from "pdfjs-dist/legacy/build/pdf";
+import * as pdfjs from "pdfjs-dist";
 
 // Make sure to provide the worker script path
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
+).toString();
 
 export default function Home() {
   const [documentText, setDocumentText] = useState<string | null>(null);
