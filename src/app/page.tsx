@@ -1,21 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FileUpload from "@/components/file-upload";
 import SpeedReader from "@/components/speed-reader";
-import * as pdfjs from "pdfjs-dist";
 
-// Make sure to provide the worker script path
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// Define the type for the pdfjs module
+type PdfJsModule = typeof import("pdfjs-dist");
 
 export default function Home() {
   const [documentText, setDocumentText] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pdfjs, setPdfjs] = useState<PdfJsModule | null>(null);
+
+  useEffect(() => {
+    // Dynamically import pdfjs-dist and set workerSrc
+    const loadPdfjs = async () => {
+      const pdfjsModule = await import("pdfjs-dist");
+      pdfjsModule.GlobalWorkerOptions.workerSrc = new URL(
+        "pdfjs-dist/build/pdf.worker.min.mjs",
+        import.meta.url
+      ).toString();
+      setPdfjs(pdfjsModule);
+    };
+    loadPdfjs();
+  }, []);
 
   const handleFileUpload = async (file: File) => {
+    if (!pdfjs) {
+        setError("PDF library is still loading. Please wait a moment and try again.");
+        return;
+    }
+
     setError(null);
     if (file.type !== "application/pdf") {
       setError("Please upload a valid PDF file.");
