@@ -29,11 +29,18 @@ const WordDisplay: FC<WordDisplayProps> = ({ word }) => {
   const post = word.substring(focalIndex + 1);
 
   useLayoutEffect(() => {
-    if (preRef.current && focalRef.current) {
-      const preWidth = preRef.current.offsetWidth;
-      const focalWidth = focalRef.current.offsetWidth;
-      setOffset(preWidth + focalWidth / 2);
-    }
+    const calculateOffset = () => {
+      if (preRef.current && focalRef.current) {
+        const preWidth = preRef.current.offsetWidth;
+        const focalWidth = focalRef.current.offsetWidth;
+        setOffset(preWidth + focalWidth / 2);
+      }
+    };
+
+    calculateOffset();
+
+    window.addEventListener('resize', calculateOffset);
+    return () => window.removeEventListener('resize', calculateOffset);
   }, [word]);
 
 
