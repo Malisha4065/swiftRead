@@ -43,17 +43,17 @@ const WordDisplay: FC<WordDisplayProps> = ({ word }) => {
         className="absolute top-1/2 left-1/2 -translate-y-1/2"
         style={{ transform: `translateX(calc(-50% - ${offset}px))` }}
       >
-        <p className="text-5xl md:text-7xl font-light tracking-wider whitespace-nowrap invisible my-4">
-            <span ref={preRef}>{pre}</span>
-            <span ref={focalRef} className="text-primary font-normal">{focalChar}</span>
-            <span>{post}</span>
+        <p className="text-5xl md:text-7xl font-light tracking-wider whitespace-nowrap invisible">
+          <span ref={preRef}>{pre}</span>
+          <span ref={focalRef} className="text-primary font-normal">{focalChar}</span>
+          <span>{post}</span>
         </p>
       </div>
       <div
         className="absolute top-1/2 left-1/2 -translate-y-1/2"
         style={{ transform: `translateX(-${offset}px)` }}
       >
-        <p className="text-5xl md:text-7xl font-light tracking-wider whitespace-nowrap my-4">
+        <p className="text-5xl md:text-7xl font-light tracking-wider whitespace-nowrap">
           <span>{pre}</span>
           <span className="text-primary font-normal">{focalChar}</span>
           <span>{post}</span>
@@ -61,12 +61,12 @@ const WordDisplay: FC<WordDisplayProps> = ({ word }) => {
       </div>
 
       {/* Visual guide for the focal point */}
-      <div 
+      <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         aria-hidden="true"
       >
-        <div className="absolute top-[-5rem] w-[2px] h-2 bg-primary/50 rounded-full"></div>
-        <div className="absolute top-[5.5rem] w-[2px] h-2 bg-primary/50 rounded-full"></div>
+        <div className="absolute top-[-3rem] left-1/2 -translate-x-1/2 w-[2px] h-2 bg-primary/50 rounded-full"></div>
+        <div className="absolute top-[5.5rem] left-1/2 -translate-x-1/2 w-[2px] h-2 bg-primary/50 rounded-full"></div>
       </div>
     </div>
   );
