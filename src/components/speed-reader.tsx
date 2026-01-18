@@ -32,7 +32,7 @@ const SpeedReader: FC<SpeedReaderProps> = ({ text, onExit }) => {
       return () => clearInterval(timer);
     }
   }, [isPlaying, currentIndex, words.length, interval, isNavigating]);
-  
+
   useEffect(() => {
     if (currentIndex >= words.length) {
       setIsPlaying(false);
@@ -41,7 +41,7 @@ const SpeedReader: FC<SpeedReaderProps> = ({ text, onExit }) => {
 
 
   const togglePlay = () => {
-    if(currentIndex >= words.length - 1) {
+    if (currentIndex >= words.length - 1) {
       setCurrentIndex(0);
       setIsPlaying(true);
     } else {
@@ -71,11 +71,11 @@ const SpeedReader: FC<SpeedReaderProps> = ({ text, onExit }) => {
   return (
     <>
       {isNavigating && (
-        <TextNavigator 
-            words={words}
-            currentIndex={currentIndex}
-            onSelectWord={handleSelectWord}
-            onClose={handleCloseNavigator}
+        <TextNavigator
+          words={words}
+          currentIndex={currentIndex}
+          onSelectWord={handleSelectWord}
+          onClose={handleCloseNavigator}
         />
       )}
       <div className="flex flex-col h-screen w-full p-4 sm:p-6 md:p-8">
@@ -87,9 +87,9 @@ const SpeedReader: FC<SpeedReaderProps> = ({ text, onExit }) => {
         </header>
 
         <main className="flex-grow flex items-center justify-center">
-          <WordDisplay 
-              word={words[currentIndex] || "Done!"} 
-              key={currentIndex} 
+          <WordDisplay
+            word={words[currentIndex] || "Done!"}
+            key={currentIndex}
           />
         </main>
 
@@ -113,11 +113,11 @@ const SpeedReader: FC<SpeedReaderProps> = ({ text, onExit }) => {
               {isPlaying ? <Pause className="h-8 w-8" /> : <Play className="h-8 w-8 ml-1" />}
               <span className="sr-only">{isPlaying ? "Pause" : "Play"}</span>
             </Button>
-             <Button variant="outline" size="icon" onClick={handleToggleNavigation} className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full w-12 h-12" aria-label="Navigate text">
-                <BookText className="h-6 w-6" />
+            <Button variant="outline" size="icon" onClick={handleToggleNavigation} className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full w-12 h-12" aria-label="Navigate text">
+              <BookText className="h-6 w-6" />
             </Button>
           </div>
-          <div className="text-center text-sm text-muted-foreground tabular-nums">
+          <div className="text-center text-sm text-muted-foreground tabular-nums pb-12">
             <p>Word {Math.min(currentIndex + 1, words.length)} of {words.length}</p>
           </div>
         </footer>

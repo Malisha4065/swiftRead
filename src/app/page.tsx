@@ -27,8 +27,8 @@ export default function Home() {
 
   const handleFileUpload = async (file: File) => {
     if (!pdfjs) {
-        setError("PDF library is still loading. Please wait a moment and try again.");
-        return;
+      setError("PDF library is still loading. Please wait a moment and try again.");
+      return;
     }
 
     setError(null);
@@ -67,12 +67,33 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-background">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-background relative">
       {documentText ? (
         <SpeedReader text={documentText} onExit={handleExit} />
       ) : (
         <FileUpload onUpload={handleFileUpload} error={error} />
       )}
+
+      {/* Footer links */}
+      <footer className="absolute bottom-4 flex gap-4 text-sm text-muted-foreground">
+        <a
+          href="https://github.com/Malisha4065"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary transition-colors"
+        >
+          My GitHub Profile
+        </a>
+        <span className="text-muted-foreground/50">•</span>
+        <a
+          href="https://github.com/Malisha4065/studio"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary transition-colors"
+        >
+          GitHub Repository
+        </a>
+      </footer>
     </main>
   );
 }
